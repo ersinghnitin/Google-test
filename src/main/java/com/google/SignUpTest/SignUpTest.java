@@ -1,16 +1,22 @@
 package com.google.SignUpTest;
 
 import java.util.concurrent.TimeUnit;
+
 import org.testng.Assert;
 import org.testng.annotations.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+
 import com.google.pages.*;
+
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.FileNotFoundException;
@@ -21,10 +27,24 @@ public class SignUpTest {
 	Sheet sheet;
 	Row row;
 	Cell cell;
+
 	@BeforeTest
-	public void setUp(){
-		System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-		wd=new ChromeDriver();
+	@Parameters("browser")
+	public void init(String browser){
+		if(browser.equalsIgnoreCase("firefox")){
+			wd=new FirefoxDriver();
+		} else if(browser.equalsIgnoreCase("chrome")){
+			System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+			wd=new ChromeDriver();
+
+		}else if(browser.equalsIgnoreCase("ie")){
+			System.setProperty("webdriver.chrome.driver", "IEDriverServer.exe");
+			wd=new InternetExplorerDriver();
+		} else {
+			System.out.println("Browser not found. Kindly provide correct browser name");
+		}
+		wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		wd.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		try{
 			file=new FileInputStream("test.xlsx");
 			workbook=new XSSFWorkbook(file);
@@ -32,13 +52,16 @@ public class SignUpTest {
 			System.out.println("Excel file not found"+fnf);
 		}catch(IOException ioe){
 			System.out.println("File not read successfully"+ioe);
+		}catch(TimeoutException toe){
+			System.out.println("page load timed out");
 		}
 		sheet=workbook.getSheet("Test");
 		row=sheet.getRow(1);		
 	}
+
 	@Test
 	public void signUp(){
-		wd.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+
 		//navigate to google uk page
 		wd.navigate().to("https://www.google.co.uk/");
 
@@ -54,28 +77,36 @@ public class SignUpTest {
 
 		//creating signup page object
 		SignUp signUp=new SignUp(wd);
-
-		try{Thread.sleep(5000);}catch(InterruptedException ie){			
-		}
 		//calling method fill Details to fill required details on the page.
 		signUp.fillDetails(row.getCell(0).toString(),row.getCell(1).toString(),
 				row.getCell(2).toString(),row.getCell(3).toString(),row.getCell(4).toString(),
 				row.getCell(5).toString(),row.getCell(6).toString(),row.getCell(7).toString(),
 				row.getCell(8).toString(),row.getCell(9).toString(),row.getCell(10).toString());
 
-		//waiting for alert message to appear
-		try{Thread.sleep(5000);}catch(InterruptedException ie){			
+		// check for error message- expected result
+		if(isElementPresent(By.xpath("//*[@id='errormsg_0_GmailAddress']"))){
+			WebElement alertMsg=wd.findElement(By.xpath("//*[@id='errormsg_0_GmailAddress']"));
+			System.out.println(alertMsg.getText());
+			Assert.assertEquals(alertMsg.getText(),"You can't leave this empty.","Test Unsuccessful, String not found");
+		}else{
+			System.out.println("Required element not find.");
 		}
-
-		WebElement alert=wd.findElement(By.cssSelector("html body div.wrapper div.signuponepage.main.content.clearfix div.clearfix div.sign-up div.signup-box form#createaccount.createaccount-form div#gmail-address-form-element.form-element.email-address div#username-errormsg-and-suggestions span#errormsg_0_GmailAddress.errormsg"));
-		System.out.println(alert.getText());
-		Assert.assertEquals(alert.getText(),"You can't leave this empty.","Test Unsuccessful, String not found");
-
 	}
+
+	//finding element
+	private boolean isElementPresent(By by) {
+		try {
+			wd.findElement(by);
+			return true;
+		} catch (NoSuchElementException e) {
+			return false;
+		}
+	}
+
 	@AfterTest
-	public void closeInstances(){
+	public void close(){
 		try{
-		file.close();
+			file.close();
 		}catch(IOException ioe){System.out.println("workbook not closed"+ioe);}
 		//wd.close();
 	}

@@ -5,22 +5,22 @@ import org.openqa.selenium.*;
 
 public class SignUp{
 	private WebDriver wd;
-	private By fName=By.cssSelector("html body div.wrapper div.signuponepage.main.content.clearfix div.clearfix div.sign-up div.signup-box form#createaccount.createaccount-form div#name-form-element.form-element.multi-field.name fieldset label#firstname-label.firstname input#FirstName");
-	private By lName=By.cssSelector("html body div.wrapper div.signuponepage.main.content.clearfix div.clearfix div.sign-up div.signup-box form#createaccount.createaccount-form div#name-form-element.form-element.multi-field.name fieldset label#lastname-label.lastname input#LastName");
-	private By uName=By.cssSelector("//*[@id='GmailAddress']");
-	private By pass=By.cssSelector("html body div.wrapper div.signuponepage.main.content.clearfix div.clearfix div.sign-up div.signup-box form#createaccount.createaccount-form div#password-form-element.form-element label#password-label input#Passwd");
-	private By cPass=By.cssSelector("html body div.wrapper div.signuponepage.main.content.clearfix div.clearfix div.sign-up div.signup-box form#createaccount.createaccount-form div#confirm-password-form-element.form-element label#confirm-password-label input#PasswdAgain");
+	private By fName=By.xpath("//*[@id='FirstName']");
+	private By lName=By.xpath("//*[@id='LastName']");
+	private By uName=By.xpath("//*[@id='GmailAddress']");
+	private By pass=By.xpath("//*[@id='Passwd']");
+	private By cPass=By.xpath("//*[@id='PasswdAgain']");
 	private By monthBtn=By.xpath("//*[@id='BirthMonth']/div[1]/div[2]");
 	private By month=By.xpath("//*[@id=':1']");
-	private By day=By.cssSelector("html body div.wrapper div.signuponepage.main.content.clearfix div.clearfix div.sign-up div.signup-box form#createaccount.createaccount-form div#birthday-form-element.form-element.multi-field.birthday fieldset label#day-label.day input#BirthDay");
-	private By year=By.cssSelector("html body div.wrapper div.signuponepage.main.content.clearfix div.clearfix div.sign-up div.signup-box form#createaccount.createaccount-form div#birthday-form-element.form-element.multi-field.birthday fieldset label#year-label.year input#BirthYear");
+	private By day=By.xpath("//*[@id='BirthDay']");
+	private By year=By.xpath("//*[@id='BirthYear']");
 	private By genderBtn=By.xpath("//*[@id='Gender']/div[1]/div[2]");
 	private By gender=By.xpath("//*[@id=':f']");
-	private By phone=By.cssSelector("input[name='RecoveryPhoneNumber']");
-	private By email=By.cssSelector("html body div.wrapper div.signuponepage.main.content.clearfix div.clearfix div.sign-up div.signup-box form#createaccount.createaccount-form div#recovery-email-form-element.form-element.recovery-email label#recovery-email-label input#RecoveryEmailAddress");
-	private By check=By.cssSelector("html body div.wrapper div.signuponepage.main.content.clearfix div.clearfix div.sign-up div.signup-box form#createaccount.createaccount-form div.form-element div.form-element.skip-captcha label input#SkipCaptcha");
-	private By agreement=By.cssSelector("html body div.wrapper div.signuponepage.main.content.clearfix div.clearfix div.sign-up div.signup-box form#createaccount.createaccount-form div#termsofservice-form-element.form-element.terms-of-service label#termsofservice-label input#TermsOfService");
-	private By submit=By.cssSelector("input[name='submitbutton']");
+	private By phone=By.xpath("//*[@id='RecoveryPhoneNumber']");
+	private By email=By.xpath("//*[@id='RecoveryEmailAddress']");
+	private By check=By.xpath("//*[@id='SkipCaptcha']");
+	private By agreement=By.xpath("//*[@id='TermsOfService']");
+	private By submit=By.xpath("//*[@id='submitbutton']");
 	public SignUp(WebDriver wd){
 		this.wd=wd;
 	}
