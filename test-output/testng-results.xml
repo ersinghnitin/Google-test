@@ -2,27 +2,27 @@
 <testng-results skipped="0" failed="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Suite" duration-ms="31588" started-at="2015-02-22T06:58:28Z" finished-at="2015-02-22T06:58:59Z">
+  <suite name="Suite" duration-ms="21497" started-at="2015-03-02T17:20:33Z" finished-at="2015-03-02T17:20:54Z">
     <groups>
     </groups>
-    <test name="Test" duration-ms="31588" started-at="2015-02-22T06:58:28Z" finished-at="2015-02-22T06:58:59Z">
+    <test name="Test" duration-ms="21497" started-at="2015-03-02T17:20:33Z" finished-at="2015-03-02T17:20:54Z">
       <class name="com.google.SignUpTest.SignUpTest">
-        <test-method status="PASS" signature="init(java.lang.String)[pri:0, instance:com.google.SignUpTest.SignUpTest@1727596]" name="init" is-config="true" duration-ms="9294" started-at="2015-02-22T12:28:28Z" finished-at="2015-02-22T12:28:37Z">
+        <test-method status="PASS" signature="init(java.lang.String)[pri:0, instance:com.google.SignUpTest.SignUpTest@156cd93]" name="init" is-config="true" duration-ms="5652" started-at="2015-03-02T22:50:33Z" finished-at="2015-03-02T22:50:38Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[firefox]]>
+                <![CDATA[chrome]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- init -->
-        <test-method status="PASS" signature="signUp()[pri:0, instance:com.google.SignUpTest.SignUpTest@1727596]" name="signUp" duration-ms="22276" started-at="2015-02-22T12:28:37Z" finished-at="2015-02-22T12:28:59Z">
+        <test-method status="PASS" signature="signUp()[pri:0, instance:com.google.SignUpTest.SignUpTest@156cd93]" name="signUp" duration-ms="15816" started-at="2015-03-02T22:50:38Z" finished-at="2015-03-02T22:50:54Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- signUp -->
-        <test-method status="PASS" signature="close()[pri:0, instance:com.google.SignUpTest.SignUpTest@1727596]" name="close" is-config="true" duration-ms="0" started-at="2015-02-22T12:28:59Z" finished-at="2015-02-22T12:28:59Z">
+        <test-method status="PASS" signature="close()[pri:0, instance:com.google.SignUpTest.SignUpTest@156cd93]" name="close" is-config="true" duration-ms="0" started-at="2015-03-02T22:50:54Z" finished-at="2015-03-02T22:50:54Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- close -->

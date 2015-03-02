@@ -38,7 +38,7 @@ public class SignUpTest {
 			wd=new ChromeDriver();
 
 		}else if(browser.equalsIgnoreCase("ie")){
-			System.setProperty("webdriver.chrome.driver", "IEDriverServer.exe");
+			System.setProperty("webdriver.ie.driver", "IEDriverServer.exe");
 			wd=new InternetExplorerDriver();
 		} else {
 			System.out.println("Browser not found. Kindly provide correct browser name");
@@ -84,23 +84,8 @@ public class SignUpTest {
 				row.getCell(8).toString(),row.getCell(9).toString(),row.getCell(10).toString());
 
 		// check for error message- expected result
-		if(isElementPresent(By.xpath("//*[@id='errormsg_0_GmailAddress']"))){
-			WebElement alertMsg=wd.findElement(By.xpath("//*[@id='errormsg_0_GmailAddress']"));
-			System.out.println(alertMsg.getText());
-			Assert.assertEquals(alertMsg.getText(),"You can't leave this empty.","Test Unsuccessful, String not found");
-		}else{
-			System.out.println("Required element not find.");
-		}
-	}
-
-	//finding element
-	private boolean isElementPresent(By by) {
-		try {
-			wd.findElement(by);
-			return true;
-		} catch (NoSuchElementException e) {
-			return false;
-		}
+		Assert.assertEquals(signUp.errMessage(),"You can't leave this empty.","Test Unsuccessful, String not found");
+		
 	}
 
 	@AfterTest

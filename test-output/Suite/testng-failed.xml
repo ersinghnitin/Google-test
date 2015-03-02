@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Suite]" parallel="none">
-  <parameter name="browser" value="firefox"/>
+  <parameter name="browser" value="chrome"/>
   <test name="Test(failed)" parallel="none">
-    <parameter name="browser" value="firefox"/>
+    <parameter name="browser" value="chrome"/>
     <classes>
       <class name="com.google.SignUpTest.SignUpTest">
         <methods>

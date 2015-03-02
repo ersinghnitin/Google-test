@@ -21,11 +21,12 @@ public class SignUp{
 	private By check=By.xpath("//*[@id='SkipCaptcha']");
 	private By agreement=By.xpath("//*[@id='TermsOfService']");
 	private By submit=By.xpath("//*[@id='submitbutton']");
+	private By errMessage=By.xpath("//*[@id='errormsg_0_GmailAddress']");
 	public SignUp(WebDriver wd){
 		this.wd=wd;
 	}
 
-//### Fill form elements.###
+	//### Fill form elements.###
 	private void setFName(String strFName){
 		wd.findElement(fName).sendKeys(strFName);
 	}
@@ -75,11 +76,11 @@ public class SignUp{
 		wd.findElement(submit).click();
 	}
 
-//### public method exposed to test classs.
+	//### public method exposed to test classs.
 	public void fillDetails(String strFName,String strLName,String strUName,String strPass,String strCPass,String strMonth,String strDay,String strYear,String strGender,String strPhone,String strEmail){
 		this.setFName(strFName);
 		this.setLName(strLName);
-		//this.setUName(strUName);
+		this.setUName(strUName);
 		this.setPass(strPass);
 		this.setCPass(strCPass);
 		this.clickMonthBtn();
@@ -93,5 +94,24 @@ public class SignUp{
 		this.clickCheck();
 		this.clickAgreement();
 		this.clickSubmit();
+	}
+
+	// Get error message
+	public String errMessage(){
+		if(isElementPresent(errMessage)){
+			WebElement alertMsg=wd.findElement(errMessage);
+			return alertMsg.getText();			
+		}else{
+			return "Required element not find.";
+		}
+	}
+	//finding element
+	private boolean isElementPresent(By by) {
+		try {
+			wd.findElement(by);
+			return true;
+		} catch (NoSuchElementException e) {
+			return false;
+		}
 	}
 }
