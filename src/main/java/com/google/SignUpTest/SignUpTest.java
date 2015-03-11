@@ -23,10 +23,10 @@ import java.io.FileNotFoundException;
 public class SignUpTest {
 	public WebDriver wd;
 	public FileInputStream file;
-	Workbook workbook;
-	Sheet sheet;
-	Row row;
-	Cell cell;
+	private Workbook workbook;
+	private Sheet sheet;
+	private Row row;
+	private Cell cell;
 
 	@BeforeTest
 	@Parameters("browser")
