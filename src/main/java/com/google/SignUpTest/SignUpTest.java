@@ -14,7 +14,6 @@ import com.google.pages.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 
 import java.io.FileInputStream;
@@ -26,7 +25,7 @@ public class SignUpTest {
 	private Workbook workbook;
 	private Sheet sheet;
 	private Row row;
-	private Cell cell;
+	WebElement message;
 
 	@BeforeTest
 	@Parameters("browser")
@@ -68,7 +67,7 @@ public class SignUpTest {
 		//creating google search page object
 		GoogleSearch gs=new GoogleSearch(wd);
 		//calling google search method for clicking the link.
-		Assert.assertTrue(gs.clickGmailLink(),"Page loaded successfully");
+		gs.clickGmailLink();
 
 		//creating login page object
 		GmailLogin gl=new GmailLogin(wd);
@@ -84,8 +83,10 @@ public class SignUpTest {
 				row.getCell(8).toString(),row.getCell(9).toString(),row.getCell(10).toString());
 
 		// check for error message- expected result
-		Assert.assertEquals(signUp.errMessage(),"You can't leave this empty.","Test Unsuccessful, String not found");
-		
+		if(isElementPresent(signUp.errMessage)){
+			signUp.errMessage();
+			Assert.assertEquals(signUp.message.getText(),"You can't leave this empty.","Test Unsuccessful, String not found");
+		}
 	}
 
 	@AfterTest
@@ -94,6 +95,16 @@ public class SignUpTest {
 			file.close();
 		}catch(IOException ioe){System.out.println("workbook not closed"+ioe);}
 		//wd.close();
+	}
+	
+	//finding element
+	private boolean isElementPresent(By by) {
+		try {
+			wd.findElement(by);
+			return true;
+		} catch (NoSuchElementException e) {
+			return false;
+		}
 	}
 
 }

@@ -4,78 +4,82 @@ import org.openqa.selenium.*;
 
 
 public class SignUp{
-	private WebDriver wd;
-	private By fName=By.xpath("//*[@id='FirstName']");
-	private By lName=By.xpath("//*[@id='LastName']");
-	private By uName=By.xpath("//*[@id='GmailAddress']");
-	private By pass=By.xpath("//*[@id='Passwd']");
-	private By cPass=By.xpath("//*[@id='PasswdAgain']");
-	private By monthBtn=By.xpath("//*[@id='BirthMonth']/div[1]/div[2]");
-	private By month=By.xpath("//*[@id=':1']");
-	private By day=By.xpath("//*[@id='BirthDay']");
-	private By year=By.xpath("//*[@id='BirthYear']");
-	private By genderBtn=By.xpath("//*[@id='Gender']/div[1]/div[2]");
-	private By gender=By.xpath("//*[@id=':f']");
-	private By phone=By.xpath("//*[@id='RecoveryPhoneNumber']");
-	private By email=By.xpath("//*[@id='RecoveryEmailAddress']");
-	private By check=By.xpath("//*[@id='SkipCaptcha']");
-	private By agreement=By.xpath("//*[@id='TermsOfService']");
-	private By submit=By.xpath("//*[@id='submitbutton']");
-	private By errMessage=By.xpath("//*[@id='errormsg_0_GmailAddress']");
+	public WebDriver wd;
+	public By fName=By.xpath("//*[@id='FirstName']");
+	public By lName=By.xpath("//*[@id='LastName']");
+	public By uName=By.xpath("//*[@id='GmailAddress']");
+	public By pass=By.xpath("//*[@id='Passwd']");
+	public By cPass=By.xpath("//*[@id='PasswdAgain']");
+	public By monthBtn=By.xpath("//*[@id='BirthMonth']/div[1]/div[2]");
+	public By month=By.xpath("//*[@id=':1']");
+	public By day=By.xpath("//*[@id='BirthDay']");
+	public By year=By.xpath("//*[@id='BirthYear']");
+	public By genderBtn=By.xpath("//*[@id='Gender']/div[1]/div[2]");
+	public By gender=By.xpath("//*[@id=':f']");
+	public By phone=By.xpath("//*[@id='RecoveryPhoneNumber']");
+	public By email=By.xpath("//*[@id='RecoveryEmailAddress']");
+	public By check=By.xpath("//*[@id='SkipCaptcha']");
+	public By agreement=By.xpath("//*[@id='TermsOfService']");
+	public By submit=By.xpath("//*[@id='submitbutton']");
+	public By errMessage=By.xpath("//*[@id='errormsg_0_GmailAddress']");
+	public WebElement message;
 	public SignUp(WebDriver wd){
 		this.wd=wd;
 	}
 
 	//### Fill form elements.###
-	private void setFName(String strFName){
+	public void setFName(String strFName){
 		wd.findElement(fName).sendKeys(strFName);
 	}
-	private void setLName(String strLName){
+	public void setLName(String strLName){
 		wd.findElement(lName).sendKeys(strLName);
 	}
-	private void setUName(String strUName){
+	public void setUName(String strUName){
 		wd.findElement(uName).sendKeys(strUName);;
 	}
-	private void setPass(String strPass){
+	public void setPass(String strPass){
 		wd.findElement(pass).sendKeys(strPass);
 	}
-	private void setCPass(String strCPass){
+	public void setCPass(String strCPass){
 		wd.findElement(cPass).sendKeys(strCPass);
 	}
-	private void clickMonthBtn(){
+	public void clickMonthBtn(){
 		wd.findElement(monthBtn).click(); 
 	}
-	private void setMonth(String strMonth){
+	public void setMonth(String strMonth){
 		wd.findElement(month).click();
 	}
-	private void setDay(String strDay){
+	public void setDay(String strDay){
 		wd.findElement(day).sendKeys(strDay);
 	}
-	private void setYear(String strYear){
+	public void setYear(String strYear){
 		wd.findElement(year).sendKeys(strYear);	
 	}
-	private void clickGenderBtn(){
+	public void clickGenderBtn(){
 		wd.findElement(genderBtn).click();
 	}
-	private void setGender(String strGender){
+	public void setGender(String strGender){
 		wd.findElement(gender).click();
 	}
-	private void setPhone(String strPhone){
+	public void setPhone(String strPhone){
 		wd.findElement(phone).sendKeys(strPhone);
 	}
-	private void setEmail(String strEmail){
+	public void setEmail(String strEmail){
 		wd.findElement(email).sendKeys(strEmail);
 	}
-	private void clickCheck(){
+	public void clickCheck(){
 		wd.findElement(check).click();
 	}
-	private void clickAgreement(){
+	public void clickAgreement(){
 		wd.findElement(agreement).click();
 	}
-	private void clickSubmit(){
+	public void clickSubmit(){
 		wd.findElement(submit).click();
 	}
-
+	// Get error message
+	public void errMessage(){
+		message=wd.findElement(errMessage);
+	}
 	//### public method exposed to test classs.
 	public void fillDetails(String strFName,String strLName,String strUName,String strPass,String strCPass,String strMonth,String strDay,String strYear,String strGender,String strPhone,String strEmail){
 		this.setFName(strFName);
@@ -94,24 +98,5 @@ public class SignUp{
 		this.clickCheck();
 		this.clickAgreement();
 		this.clickSubmit();
-	}
-
-	// Get error message
-	public String errMessage(){
-		if(isElementPresent(errMessage)){
-			WebElement alertMsg=wd.findElement(errMessage);
-			return alertMsg.getText();			
-		}else{
-			return "Required element not find.";
-		}
-	}
-	//finding element
-	private boolean isElementPresent(By by) {
-		try {
-			wd.findElement(by);
-			return true;
-		} catch (NoSuchElementException e) {
-			return false;
-		}
 	}
 }

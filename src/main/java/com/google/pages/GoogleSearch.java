@@ -5,9 +5,8 @@ public class GoogleSearch {
 	public GoogleSearch(WebDriver wd){
 		this.wd=wd;
 	}
-	public Boolean clickGmailLink(){
+	public void clickGmailLink(){
 		wd.manage().window().maximize();
 		wd.findElement(By.linkText("Gmail")).click();
-		return true;
 	}
 }
