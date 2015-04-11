@@ -63,19 +63,17 @@ public class SignUpTest {
 
 		//navigate to google uk page
 		wd.navigate().to("https://www.google.co.uk/");
-
+		wd.manage().window().maximize();
 		//creating google search page object
 		GoogleSearch gs=new GoogleSearch(wd);
 		//calling google search method for clicking the link.
-		gs.clickGmailLink();
+		GmailLogin gl=gs.clickGmailLink();
+        if (!wd.getTitle().equals("Gmail")) {
+            throw new IllegalStateException("Incorrect login page");
+        }
+		//calling method clickCreateAccount of login page and creating signup page object
+		SignUp signUp=gl.clickCreateAccount();
 
-		//creating login page object
-		GmailLogin gl=new GmailLogin(wd);
-		//calling method clickCreateAccount of login page
-		gl.clickCreateAccount();
-
-		//creating signup page object
-		SignUp signUp=new SignUp(wd);
 		//calling method fill Details to fill required details on the page.
 		signUp.fillDetails(row.getCell(0).toString(),row.getCell(1).toString(),
 				row.getCell(2).toString(),row.getCell(3).toString(),row.getCell(4).toString(),

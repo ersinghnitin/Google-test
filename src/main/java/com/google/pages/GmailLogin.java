@@ -6,8 +6,9 @@ public class GmailLogin {
 	public GmailLogin(WebDriver wd){
 		this.wd=wd;
 	}
-	public void clickCreateAccount(){
+	public SignUp clickCreateAccount(){
 		wd.findElement(By.xpath("//*[@id='link-signup']")).click();
+		return new SignUp(wd);
 	}
 	
 	
